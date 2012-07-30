@@ -14,11 +14,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 class DamageListener implements Listener{
     private final ExplodingChickens plugin;
-
-    public DamageListener(ExplodingChickens instance) {
-        this.plugin = instance;
-    }
-    
+  
     @EventHandler
     public void whenDamaged(EntityDeathEvent event) {
         Entity entity = event.getEntity();
@@ -29,5 +25,9 @@ class DamageListener implements Listener{
         }
         
     }
-
+    
+    public DamageListener(ExplodingChickens instance) {
+        this.plugin = instance;
+    }
+    
 }
