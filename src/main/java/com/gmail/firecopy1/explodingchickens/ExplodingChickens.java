@@ -7,11 +7,13 @@ package com.gmail.firecopy1.explodingchickens;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ExplodingChickens extends JavaPlugin {
-
+    public int ExplosionDamage;
+    boolean FireToggle;
     private final DamageListener dListener = new DamageListener(this);
 
     @Override
     public void onEnable() {
+        loadConfig();
         registerEvents();
     }
 
@@ -21,5 +23,9 @@ public class ExplodingChickens extends JavaPlugin {
 
     private void loadConfig() {
         this.getConfig().options().copyDefaults(true);
+        ExplosionDamage = this.getConfig().getInt("ExplosionDamage", 8);
+        FireToggle = this.getConfig().getBoolean("FireToggle", false);
+        
+        saveConfig();
     }
 }
