@@ -12,25 +12,21 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
-class DamageListener implements Listener{
-    private ExplodingChickens plugin;
-    private boolean FlameToggle;
-    private float DamageOfExplosion;
+class DamageListener implements Listener {
     
-    @EventHandler
-    public void whenDamaged(EntityDeathEvent event) {
-        DamageOfExplosion = plugin.ExplosionDamage;
-        FlameToggle = plugin.FireToggle;
-        Entity entity = event.getEntity();
-        if (entity instanceof Chicken){
-            Location ExplosionLoc = entity.getLocation();
-            World world = entity.getWorld();
-            world.createExplosion(ExplosionLoc, DamageOfExplosion, FlameToggle);
-        }
-    }
+    private ExplodingChickens plugin;
     
     public DamageListener(ExplodingChickens instance) {
         this.plugin = instance;
     }
-   
+    
+    @EventHandler
+    public void whenDamaged(EntityDeathEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Chicken){
+            Location explosionLoc = entity.getLocation();
+            World world = entity.getWorld();
+            world.createExplosion(explosionLoc, plugin.getDamage(), plugin.isFireToggle());
+        }
+    }
 }
